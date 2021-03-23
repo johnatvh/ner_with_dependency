@@ -137,8 +137,8 @@ class NNCRF(nn.Module):
             size = self.embedding_dim if not self.use_char else (self.embedding_dim + self.charlstm_dim)
             dep_head_emb = torch.gather(word_emb, 1, dep_head_tensor.view(batch_size, sent_len, 1).expand(batch_size, sent_len, size))
 
-        if self.context_emb != ContextEmb.none:
-            word_emb = torch.cat((word_emb, batch_context_emb.to(self.device)), 2)
+#         if self.context_emb != ContextEmb.none:
+#             word_emb = torch.cat((word_emb, batch_context_emb.to(self.device)), 2)
 
         if self.use_char:
             if self.dep_model != DepModelType.dglstm:
