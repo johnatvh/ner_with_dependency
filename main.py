@@ -74,7 +74,9 @@ def parse_arguments(parser):
     parser.add_argument('--context_emb', type=str, default="none", choices=["none", "bert", "elmo", "flair"], help="contextual word embedding")
 
 
-
+    parser.add_argument('--i2b2_train_dir', type=str)
+    parser.add_argument('--i2b2_dev_dir', type=str)
+    parser.add_argument('--i2b2_test_dir', type=str)
 
     args = parser.parse_args()
     for k in args.__dict__:
@@ -256,9 +258,12 @@ def main():
     reader = Reader(conf.digit2zero)
     setSeed(opt, conf.seed)
 
-    trains = reader.read_conll(conf.train_file, -1, True)
-    devs = reader.read_conll(conf.dev_file, conf.dev_num, False)
-    tests = reader.read_conll(conf.test_file, conf.test_num, False)
+#     trains = reader.read_conll(conf.train_file, -1, True)
+#     devs = reader.read_conll(conf.dev_file, conf.dev_num, False)
+#     tests = reader.read_conll(conf.test_file, conf.test_num, False)
+    trains = reader.read_i2b2(opt.i2b2_train_dir, -1, True)
+    devs = reader.read_i2b2(opt.i2b2_dev_dir, conf.dev_num, False)
+    tests = reader.read_i2b2(opt.i2b2_test_dir, conf.test_num, False)
 
     if conf.context_emb != ContextEmb.none:
         print('Loading the {} vectors for all datasets.'.format(conf.context_emb.name))
