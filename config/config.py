@@ -291,13 +291,13 @@ class Config:
                     else:
                         char_id.append(self.char2idx[self.UNK])
                 inst.char_ids.append(char_id)
-            for i, head in enumerate(inst.input.heads):
-                if head == -1:
-                    inst.dep_head_ids.append(i) ## appended it self.
-                else:
-                    inst.dep_head_ids.append(head)
-            for label in inst.input.dep_labels:
-                inst.dep_label_ids.append(self.deplabel2idx[label])
+#             for i, head in enumerate(inst.input.heads):
+#                 if head == -1:
+#                     inst.dep_head_ids.append(i) ## appended it self.
+#                 else:
+#                     inst.dep_head_ids.append(head)
+#             for label in inst.input.dep_labels:
+#                 inst.dep_label_ids.append(self.deplabel2idx[label])
             for label in inst.output:
                 inst.output_ids.append(self.label2idx[label])
             insts_ids.append([inst.word_ids, inst.char_ids, inst.output_ids])
